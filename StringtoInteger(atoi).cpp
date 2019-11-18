@@ -17,7 +17,7 @@ class Solution {
         c = str[i];
         if (c >= '0' && c <= '9') {
           vec.push_back(c - '0');
-          //default for no conversion        
+          
         }
 
       }
