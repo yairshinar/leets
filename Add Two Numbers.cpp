@@ -13,38 +13,26 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int sum=0;
-        // pointer to NULL
-        ListNode *l3=NULL;
-        //pointer to pointer to Address    
-        ListNode **node=&l3;
         
-        while(l1!=NULL||l2!=NULL||sum>0)
-        {
-            //add first val
-            if(l1!=NULL)
-            {
-                sum+=l1->val;
-                l1=l1->next;
-            }
-            //add second val
-            if(l2!=NULL)
-            {
-                sum+=l2->val;
-                l2=l2->next;
-            }
-            //Create new ListNode with first digit
-            (*node)=new ListNode(sum%10);
-            
-            //Keep carry only to sum with it on later loop
-            sum/=10;
-            
-            // assign node to address of next of pointer node from two lines above for next loop creating new node on it.
-            node=&((*node)->next);
+        int carry = 0;
+        ListNode *res = NULL;
+        ListNode *curr = res;
+        while (l1 || l2 || carry) {
+            int v1 = l1 ? l1->val : 0;
+            int v2 = l2 ? l2->val : 0;
+            int sum = v1 + v2 + carry;
+            carry = sum > 9;
+            sum -= 10 * carry;
+            ListNode *node = new ListNode(sum);
+            if (!res) 
+                res = curr = node;
+            else 
+                curr = curr->next = node;
+            l1 = l1 ? l1->next : l1;
+            l2 = l2 ? l2->next : l2;
         }
-        
-      
-        return l3;
+        return res;
+            
     }
 };
 
