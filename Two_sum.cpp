@@ -17,14 +17,7 @@ public:
     }
 };
 
-//On
-//Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-
-//You may assume that each input would have exactly one solution, and you may not use the same element twice.
-//Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-
-//You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
+//On 
 class Solution {
 public:
 
@@ -34,21 +27,20 @@ public:
         map<int, int>::iterator it = umap.begin();
 
         for (int init = 0; init < nums.size(); init++) {
-            umap.insert(pair<int, int>(nums[init], init));
-        }
-        for (int i = 0; i < nums.size(); i++) {
+            it = umap.find(target - nums[init]);
+            if (it != umap.end() && umap[target - nums[init]] != init) {
 
-
-            it = umap.find(target - nums[i]);
-            if (it != umap.end() && umap[target - nums[i]] != i) {
-
-                vect.push_back(i);
-                vect.push_back(umap[target - nums[i]]);
+                vect.push_back(init);
+                vect.push_back(umap[target - nums[init]]);
 
                 return vect;
 
             }
+            umap.insert(pair<int, int>(nums[init], init));
+            
         }
+             
+       
         return vect;
     }
-}; 
+};
